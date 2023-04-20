@@ -40,7 +40,6 @@ CREATE TABLE
 CREATE TABLE
     schedules (
         id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users (id),
         zones JSONB NOT NULL,
         start_time TIME NOT NULL,
         days INTEGER[] NOT NULL,
