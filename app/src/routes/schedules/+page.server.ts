@@ -4,7 +4,7 @@ import type { PageServerLoad, Actions } from './$types';
 
 export const load = (async (params) => {
 	const dbConnection = await connectToDB();
-	const sprinklers = await dbConnection.query('SELECT * FROM schedule');
+	const sprinklers = await dbConnection.query('SELECT * FROM schedules');
 	console.log('sprinklers:', sprinklers.rows);
 	dbConnection.release();
 	return { sprinklers: sprinklers.rows };
@@ -16,7 +16,7 @@ export const actions: Actions = {
 		console.log(theFormData.get('gpio'), theFormData.get('description'));
 		const dbConnection = await connectToDB();
 		const newSchedule = await dbConnection.query(
-			'INSERT INTO schedule (gpio, description) VALUES ($1, $2) RETURNING *',
+			'INSERT INTO schedules (gpio, description) VALUES ($1, $2) RETURNING *',
 			[theFormData.get('gpio'), theFormData.get('description')]
 		);
 		dbConnection.release();

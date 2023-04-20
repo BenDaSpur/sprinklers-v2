@@ -42,7 +42,7 @@ CREATE TABLE
         id SERIAL PRIMARY KEY,
         zones JSONB NOT NULL,
         start_time TIME NOT NULL,
-        days INTEGER[] NOT NULL,
+        days JSONB NOT NULL,
         is_disabled BOOLEAN NOT NULL,
         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
