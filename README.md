@@ -4,13 +4,13 @@ Built with sveltekit and docker to run on raspberry pi
 
 
 ## How to run
-`docker-compose -f "docker-compose.yml" up -d --build`
+`docker compose up` or add `-d` to run in background
 
 Open site by going to `localhost`
 
 
 ## Tearing down
-`docker compose down -v`
+`docker compose down` or add `-v` to remove data
 
 
 ## Weather Cron
