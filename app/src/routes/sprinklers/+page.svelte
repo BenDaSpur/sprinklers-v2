@@ -5,7 +5,7 @@
 	let description = '';
 </script>
 
-{data.sprinklers.length}
+<h3>Sprinklers</h3>
 <Row>
 	<Col>
 		<Table striped>

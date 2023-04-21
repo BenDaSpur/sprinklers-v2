@@ -9,5 +9,7 @@
 	<meta name="description" content="Sprinklers App" />
 </svelte:head>
 
+<h3>Sprinkler Dashboard</h3>
+
 <style>
 </style>

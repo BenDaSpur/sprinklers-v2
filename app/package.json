@@ -28,11 +28,13 @@
 		"svelte-check": "^3.0.1",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
+		"ts-node": "^10.9.1",
 		"vite": "^4.2.0"
 	},
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-node": "^1.2.3",
+		"dotenv": "^16.0.3",
 		"moment-timezone": "^0.5.43",
 		"pg": "^8.10.0",
 		"svelte-frappe-charts": "^1.10.0",

@@ -20,6 +20,8 @@
 	};
 </script>
 
+<h3>7 Day Weather</h3>
+
 <Chart data={chartData} type="line" />
 <!-- 
 {#each data.weather as period}

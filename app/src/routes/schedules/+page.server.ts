@@ -4,15 +4,17 @@ import type { PageServerLoad, Actions } from './$types';
 
 export const load = (async (params) => {
 	const dbConnection = await connectToDB();
-	const sprinklers = await dbConnection.query('SELECT * FROM schedules');
-	console.log('sprinklers:', sprinklers.rows);
+	const schedules = await dbConnection.query('SELECT * FROM schedules');
+	const sprinklers = await dbConnection.query('SELECT * FROM sprinkler');
+	// console.log('sprinklers:', sprinklers.rows);
 	dbConnection.release();
-	return { sprinklers: sprinklers.rows };
+	return { sprinklers: sprinklers.rows, schedules: schedules.rows };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
 	newSchedule: async ({ request }) => {
 		const theFormData = await request.formData();
+
 		console.log(theFormData.get('gpio'), theFormData.get('description'));
 		const dbConnection = await connectToDB();
 		const newSchedule = await dbConnection.query(

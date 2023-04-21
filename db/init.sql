@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- Create sprinkler table
 CREATE TABLE
     sprinkler (
@@ -18,10 +20,8 @@ CREATE TABLE
 -- Create weather table
 CREATE TABLE
     weather (
-        id SERIAL PRIMARY KEY,
-        location VARCHAR(255) NOT NULL,
-        high DECIMAL(4, 1) NOT NULL,
-        low DECIMAL(4, 1) NOT NULL,
+        id UUID DEFAULT uuid_generate_v4 () PRIMARY KEY,
+        temperature DECIMAL(4, 1) NOT NULL,
         description VARCHAR(255) NOT NULL,
         humidity INTEGER NOT NULL,
         precip_chance DECIMAL(4, 2) NOT NULL,
