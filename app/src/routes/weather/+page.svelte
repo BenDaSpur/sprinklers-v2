@@ -6,7 +6,7 @@
 	import Chart from 'svelte-frappe-charts';
 
 	const chartData = {
-		labels: data.weather.map((period) => moment(period.startTime).format('L LT')),
+		labels: data.weather.map((period) => moment(period.datetime).format('L LT')),
 		datasets: [
 			{
 				name: 'Temperature',
@@ -14,7 +14,7 @@
 			},
 			{
 				name: 'Precipitation',
-				values: data.weather.map((period) => period.probabilityOfPrecipitation.value)
+				values: data.weather.map((period) => period.precip_chance)
 			}
 		]
 	};
@@ -22,7 +22,7 @@
 
 <h3>7 Day Weather</h3>
 
-<Chart data={chartData} type="line" />
+<Chart data={chartData} type="line" colors={['red', 'blue']} />
 <!-- 
 {#each data.weather as period}
 	<Row>

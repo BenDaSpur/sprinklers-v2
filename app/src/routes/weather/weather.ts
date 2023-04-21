@@ -4,6 +4,31 @@ import pg from 'pg';
 // import { PoolConfig } from 'pg';
 
 // const Pool = pg.Pool;
+
+export interface Weather {
+	number: number;
+	name: string;
+	startTime: Date;
+	endTime: Date;
+	isDaytime: boolean;
+	temperature: number;
+	temperatureUnit: string;
+	temperatureTrend: null;
+	probabilityOfPrecipitation: Dewpoint;
+	dewpoint: Dewpoint;
+	relativeHumidity: Dewpoint;
+	windSpeed: string;
+	windDirection: string;
+	icon: string;
+	shortForecast: string;
+	detailedForecast: string;
+}
+
+export interface Dewpoint {
+	unitCode: string;
+	value: number;
+}
+
 dotenv.config();
 
 const pool = new pg.Pool({
@@ -23,7 +48,7 @@ const getWeather = async () => {
 	const weather = await fetch(process.env.WEATHER_URL);
 	const weatherData = await weather.json();
 
-	weatherData.properties.periods.forEach(async (period: any) => {
+	weatherData.properties.periods.forEach(async (period: Weather) => {
 		const dbConnection = await connectToDB();
 		const weather = await dbConnection.query('SELECT * FROM weather where datetime = $1', [
 			moment(period.startTime).tz('America/Denver').format('YYYY-MM-DD HH:mm:ss')
