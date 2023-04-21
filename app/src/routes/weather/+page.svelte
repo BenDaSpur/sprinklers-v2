@@ -20,6 +20,11 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Weather</title>
+	<meta name="description" content="Weather for spinklers" />
+</svelte:head>
+
 <h3>7 Day Weather</h3>
 
 <Chart data={chartData} type="line" colors={['red', 'blue']} />

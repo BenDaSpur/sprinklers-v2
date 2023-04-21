@@ -13,6 +13,11 @@
 	let zones = [];
 </script>
 
+<svelte:head>
+	<title>Schedules</title>
+	<meta name="description" content="Schedules for spinklers" />
+</svelte:head>
+
 <Row>
 	<Col>
 		<h3>Schedules</h3>

@@ -5,6 +5,11 @@
 	let description = '';
 </script>
 
+<svelte:head>
+	<title>Sprinklers</title>
+	<meta name="description" content="Sprinklers App" />
+</svelte:head>
+
 <h3>Sprinklers</h3>
 <Row>
 	<Col>
