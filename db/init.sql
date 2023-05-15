@@ -31,9 +31,10 @@ CREATE TABLE
 -- Create zone table
 CREATE TABLE
     zone (
-        id SERIAL PRIMARY KEY,
+        id UUID DEFAULT uuid_generate_v4 () PRIMARY KEY,
         zone_description TEXT,
-        sprinkler_id INTEGER REFERENCES sprinkler (id)
+        sprinkler_id JSONB NOT NULL,
+        zone_id INTEGER NOT NULL
     );
 
 -- Create schedule table

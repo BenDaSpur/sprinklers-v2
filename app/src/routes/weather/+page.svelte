@@ -4,9 +4,10 @@
 	export let data;
 	// @ts-ignore
 	import Chart from 'svelte-frappe-charts';
+	console.log(data.weather[0]);
 
 	const chartData = {
-		labels: data.weather.map((period) => moment(period.datetime).format('L LT')),
+		labels: data.weather.map((period) => moment(period.datetime).utc().format('L LT')),
 		datasets: [
 			{
 				name: 'Temperature',

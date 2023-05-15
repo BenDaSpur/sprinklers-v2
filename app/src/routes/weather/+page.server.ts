@@ -2,13 +2,15 @@ import { fail } from '@sveltejs/kit';
 import { connectToDB } from '$lib/db';
 import type { PageServerLoad, Actions } from './$types';
 import moment from 'moment-timezone';
+import * as dotenv from 'dotenv';
+dotenv.config();
+const tz = process.env.TIMEZONE || 'America/Denver';
 
 export const load = (async (params) => {
 	const dbConnection = await connectToDB();
 	const weather = await dbConnection.query(
-		`SELECT * FROM weather where datetime > '${moment()
-			.subtract(1, 'hours')
-			.format('YYYY-MM-DD HH:00')}'
+		`SELECT temperature, description, humidity, precip_chance, datetime::timestamp without time zone
+		FROM weather where datetime > '${moment().tz(tz).subtract(1, 'hours').format('YYYY-MM-DD HH:00')}'
 		ORDER BY datetime ASC	
 		`
 	);

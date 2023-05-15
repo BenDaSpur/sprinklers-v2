@@ -7,10 +7,10 @@
 <Container>
 	<div class="app">
 		<Row>
-			<Col md={2}>
+			<Col lg={2}>
 				<SideNav />
 			</Col>
-			<Col md={10}>
+			<Col lg={10}>
 				<main>
 					<slot />
 				</main>

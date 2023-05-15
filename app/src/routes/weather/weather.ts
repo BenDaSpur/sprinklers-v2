@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import moment from 'moment-timezone';
 import pg from 'pg';
+
 // import { PoolConfig } from 'pg';
 
 // const Pool = pg.Pool;
@@ -30,6 +31,7 @@ export interface Dewpoint {
 }
 
 dotenv.config();
+const tz = process.env.TIMEZONE || 'America/Denver';
 
 const pool = new pg.Pool({
 	database: process.env.POSTGRES_DB,
@@ -51,13 +53,13 @@ const getWeather = async () => {
 	weatherData.properties.periods.forEach(async (period: Weather) => {
 		const dbConnection = await connectToDB();
 		const weather = await dbConnection.query('SELECT * FROM weather where datetime = $1', [
-			moment(period.startTime).tz('America/Denver').format('YYYY-MM-DD HH:mm:ss')
+			moment(period.startTime).tz(tz).format('YYYY-MM-DD HH:mm:ss')
 		]);
 		if (weather.rows.length === 0) {
 			const newWeather = await dbConnection.query(
 				'INSERT INTO weather (datetime, temperature, description, precip_chance, humidity) VALUES ($1, $2, $3, $4, $5) RETURNING *',
 				[
-					moment(period.startTime).tz('America/Denver').format('YYYY-MM-DD HH:mm:ss'),
+					moment(period.startTime).tz(tz).format('YYYY-MM-DD HH:mm:ss'),
 					period.temperature,
 					period.shortForecast,
 					period.probabilityOfPrecipitation.value,
@@ -73,7 +75,7 @@ const getWeather = async () => {
 					period.shortForecast,
 					period.probabilityOfPrecipitation.value,
 					period.relativeHumidity.value,
-					moment(period.startTime).tz('America/Denver').format('YYYY-MM-DD HH:mm:ss')
+					moment(period.startTime).tz(tz).format('YYYY-MM-DD HH:mm:ss')
 				]
 			);
 			console.log('updated weather');
